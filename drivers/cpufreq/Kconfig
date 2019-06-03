@@ -155,6 +155,12 @@ config CPU_FREQ_DEFAULT_GOV_ONDEMANDPLUS
 	help
 	  Use the CPUFreq governor 'ondemandplus' as default.
 
+config CPU_FREQ_DEFAULT_GOV_XPERIENCE
+	bool "xperience"
+	select CPU_FREQ_GOV_XPERIENCE
+	help
+	  Use the CPUFreq governor 'xperience' as default.
+
 config CPU_FREQ_DEFAULT_GOV_SCHED
 	bool "sched"
 	select CPU_FREQ_GOV_INTERACTIVE
@@ -298,7 +304,14 @@ config CPU_FREQ_GOV_ONDEMANDPLUS
 	  To compile this driver as a module, choose M here: the
 	  module will be called cpufreq_ondemandplus.
 
-	  If in doubt, say N.
+config CPU_FREQ_GOV_XPERIENCE
+	tristate "'xperience' cpufreq governor"
+	depends on CPU_FREQ
+	default y
+	help
+		'XPerience' - a "powered and smart" governor.
+
+		If in doubt, say N.
 
 comment "CPU frequency scaling drivers"
 
