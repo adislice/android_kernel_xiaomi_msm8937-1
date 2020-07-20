@@ -1197,36 +1197,9 @@ int32_t msm_sensor_driver_probe(void *setting,
 	}
 #endif
 
-printk("hjl reading to enter L6200\n");
-#ifdef CONFIG_KERNEL_CUSTOM_L6200
-		 printk("lct entered CONFIG_KERNEL_CUSTOM_L6200!\n");
-	printk("slave_info->eeprom_name=%s, s_vendor_eeprom=%s\n",
-			slave_info->eeprom_name, s_vendor_eeprom[i].eeprom_name);
-	if(s_vendor_eeprom[i].eeprom_name != NULL) {
-		for(i=0; i<CAMERA_VENDOR_EEPROM_COUNT_MAX; i++) {
-			if(strcmp(slave_info->eeprom_name, s_vendor_eeprom[i].eeprom_name) == 0) {
-
-			printk("lct slave_info->sensor_name =%s, module_id=%d\n", slave_info->sensor_name, s_vendor_eeprom[i].module_id);
-				if(((strcmp(slave_info->sensor_name,"s5k5e8_oef0501_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_OFILM))
-					|| ((strcmp(slave_info->sensor_name,"s5k5e8_f5e8ybf_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_QTECH))
-					|| ((strcmp(slave_info->sensor_name,"s5k3l8_ohp0502_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_OFILM))
-					|| ((strcmp(slave_info->sensor_name,"ov13855_f13855bd_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_QTECH))) {
-						printk("lct module found!probe continue!\n");
-						break;
-				}
-			}
-		}
-
-		if(i >= CAMERA_VENDOR_EEPROM_COUNT_MAX) {
-		pr_err("lct module not found!probe break failed!\n");
-		rc = -EFAULT;
-		goto free_slave_info;
-		}
-	}
-#endif
-
-#ifdef CONFIG_KERNEL_CUSTOM_L6210
-		 printk("lct enter CONFIG_KERNEL_CUSTOM_L6210!\n");
+printk("hjl reading to enter L6200 and L6210\n");
+#if (defined CONFIG_KERNEL_CUSTOM_L6200) || (defined CONFIG_KERNEL_CUSTOM_L6210)
+	printk("lct enter CONFIG_KERNEL_CUSTOM_L6210!\n");
 	if(s_vendor_eeprom[i].eeprom_name != NULL) {
 		for(i=0; i<CAMERA_VENDOR_EEPROM_COUNT_MAX; i++) {
 			printk("slave_info->eeprom_name=%s, s_vendor_eeprom=%s\n",
@@ -1238,10 +1211,15 @@ printk("hjl reading to enter L6200\n");
 				if(((strcmp(slave_info->sensor_name,"s5k3p8sp_d16s01n_d6s") == 0) && (s_vendor_eeprom[i].module_id == MID_SUNNY))
 					|| ((strcmp(slave_info->sensor_name,"ov16885_ojf0541_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_OFILM))
 					|| ((strcmp(slave_info->sensor_name,"s5k3l8_ohp0502_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_OFILM))
+					|| ((strcmp(slave_info->sensor_name,"ov13855_f13855bd_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_QTECH))
+					|| ((strcmp(slave_info->sensor_name,"s5k5e8_oef0501_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_OFILM))
+					|| ((strcmp(slave_info->sensor_name,"s5k5e8_f5e8ybf_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_QTECH))
+					|| ((strcmp(slave_info->sensor_name,"s5k3l8_ohp0502_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_OFILM))
 					|| ((strcmp(slave_info->sensor_name,"ov13855_f13855bd_d6") == 0) && (s_vendor_eeprom[i].module_id == MID_QTECH))) {
 						printk("lct module found!probe continue!\n");
 						break;
 				}
+	
 			}
 		}
 

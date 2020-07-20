@@ -1780,25 +1780,20 @@ static uint8_t get_otp_vendor_module_id(struct msm_eeprom_ctrl_t *e_ctrl, const 
 #endif
 
 
-#ifdef CONFIG_KERNEL_CUSTOM_L6200
-	printk("hjl enter D6 front camera\n");
+#if (defined CONFIG_KERNEL_CUSTOM_L6200) || (defined CONFIG_KERNEL_CUSTOM_L6210)
+	printk("hjl enter D6 and D6's front camera\n");
 	if(strcmp(eeprom_name,"s5k5e8_oef0501_ofilm") == 0) {
 		module_id = s5k5e8_oef0501_ofilm_get_otp_vendor_module_id(e_ctrl);
 	} else if(strcmp(eeprom_name,"s5k5e8_f5e8ybf_qtech") == 0) {
 		module_id = s5k5e8_f5e8ybf_qtech_get_otp_vendor_module_id(e_ctrl);
-	}
-
-#endif
-
-
-#ifdef CONFIG_KERNEL_CUSTOM_L6210
-	printk("hjl enter D6s front camera\n");
-	if(strcmp(eeprom_name,"s5k3p8sp_d16s01n_sunny_d6s") == 0) {
+	} else if(strcmp(eeprom_name,"s5k3p8sp_d16s01n_sunny_d6s") == 0) {
 		module_id = s5k3p8sp_d16s01n_sunny_d6s_get_otp_vendro_module_id(e_ctrl);
 	} else if(strcmp(eeprom_name,"ov16885_ojf0541_ofilm_d6s") == 0) {
 		module_id = ov16885_ojf0541_ofilm_d6s_get_otp_vendor_module_id(e_ctrl);
 	}
+
 #endif
+
 
 
 #if	(defined CONFIG_KERNEL_CUSTOM_L6200  ) || (defined CONFIG_KERNEL_CUSTOM_L6210)
